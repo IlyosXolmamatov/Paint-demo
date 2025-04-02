@@ -4,7 +4,9 @@ const canvas = document.querySelector("canvas"),
     fillColor = document.querySelector("#fill-color"),
     sizeSlider = document.querySelector("#size-slider"),
     colorBtns = document.querySelectorAll(".colors .option"),
-    colorPicker = document.querySelector("#color-picker")
+    colorPicker = document.querySelector("#color-picker"),
+    clearCanvasBtn = document.querySelector(".clear-canvas")
+saveImageBtn = document.querySelector(".save-image")
 
 
 //Variables with value
@@ -69,8 +71,6 @@ const drawing = e => {
         ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor
         ctx.lineTo(e.offsetX, e.offsetY)
         ctx.stroke()
-    } else {
-
     }
 
     switch (selectedTool) {
@@ -116,6 +116,18 @@ colorPicker.addEventListener("change", e => {
     colorPicker.parentElement.click()
 })
 
+//Clear canvas button
+clearCanvasBtn.addEventListener("click", e => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+})
+
+//Save image button
+saveImageBtn.addEventListener("click", () => {
+    const link = document.createElement("a")
+    link.download = `Paint-save-${Date.now()}.jpg`
+    link.href = canvas.toDataURL()
+    link.click()
+})
 
 //Stop drawing
 const stopDraw = () => {
