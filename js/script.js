@@ -33,6 +33,14 @@ const drawRectangle = e => {
     fillColor.checked ? ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY) : ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY)
 }
 
+const drawCircle = e => {
+    ctx.beginPath()
+    const radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2))
+    ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI * radius)
+    fillColor.checked ? ctx.fill() : ctx.stroke
+    ctx.stroke()
+}
+
 //Drawing
 const drawing = e => {
     if (!isDrawing) return;
@@ -45,12 +53,14 @@ const drawing = e => {
             break;
         case "rectangle":
             drawRectangle(e)
+            break;
+        case "circle":
+            drawCircle(e)
+            break;
         default:
             break;
     }
-
 }
-
 
 //Tools btn and set to variables  selected tool
 toolBtns.forEach(btn => {
