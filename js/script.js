@@ -1,9 +1,10 @@
 //Global variables
-const canvas = document.querySelector("canvas")
-const toolBtns = document.querySelectorAll(".tool")
-const fillColor = document.querySelector("#fill-color")
+const canvas = document.querySelector("canvas"),
+    toolBtns = document.querySelectorAll(".tool"),
+    fillColor = document.querySelector("#fill-color"),
+    sizeSlider = document.querySelector("#size-slider")
 
-//Variables
+//Variables with value
 let ctx = canvas.getContext("2d"),
     isDrawing = false,
     brushWidth = 5,
@@ -33,6 +34,7 @@ const drawRectangle = e => {
     fillColor.checked ? ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY) : ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY)
 }
 
+//Draw circle
 const drawCircle = e => {
     ctx.beginPath()
     const radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2))
@@ -87,6 +89,9 @@ toolBtns.forEach(btn => {
 
     })
 })
+
+//Change brush width
+sizeSlider.addEventListener("change", () => brushWidth = sizeSlider.value)
 
 //Stop drawing
 const stopDraw = () => {
