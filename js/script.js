@@ -1,6 +1,7 @@
 //Global variables
 const canvas = document.querySelector("canvas")
 const toolBtns = document.querySelectorAll(".tool")
+const fillColor = document.querySelector("#fill-color")
 
 //Variables
 let ctx = canvas.getContext("2d"),
@@ -29,8 +30,7 @@ const startDrow = e => {
 
 //Draw rectangle
 const drawRectangle = e => {
-    ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY)
-
+    fillColor.checked ? ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY) : ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY)
 }
 
 //Drawing
@@ -64,6 +64,7 @@ toolBtns.forEach(btn => {
     })
 })
 
+//Stop drawing
 const stopDraw = () => {
     isDrawing = false
 }
