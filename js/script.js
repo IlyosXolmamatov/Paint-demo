@@ -66,13 +66,11 @@ const drawTriangle = e => {
 const drawing = e => {
     if (!isDrawing) return;
     ctx.putImageData(snapshot, 0, 0)
-
     if (selectedTool == "brush" || selectedTool == "eraser") {
         ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : selectedColor
         ctx.lineTo(e.offsetX, e.offsetY)
         ctx.stroke()
     }
-
     switch (selectedTool) {
         case "rectangle":
             drawRectangle(e)
@@ -106,7 +104,7 @@ colorBtns.forEach(btn => {
         document.querySelector(".options .selected").classList.remove("selected")
         btn.classList.add("selected")
         const bgColor = window.getComputedStyle(btn).getPropertyValue("background-color")
-        selectedColor = bgColor
+        selectedColor = bgColor;
     })
 })
 
